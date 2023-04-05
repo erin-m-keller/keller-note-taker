@@ -68,7 +68,7 @@ note’s text in the right-hand column
 
 ## Deployed page
 
-[View Published Page](https://erin-m-keller.github.io/keller-note-taker/)
+[View Published Page](https://keller-note-taker.herokuapp.com/)
 
 ## License
 
