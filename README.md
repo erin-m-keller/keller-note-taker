@@ -35,7 +35,7 @@ SO THAT I can organize my thoughts and keep track of tasks I need to complete
 
 ```md
 GIVEN a note-taking application
-WHEN I open the Note Taker
+WHEN I open the Note Tracker
 THEN I am presented with a landing page with a link to a notes  
 page
 WHEN I click on the link to the notes page
