@@ -64,7 +64,7 @@ note’s text in the right-hand column
 
 ## Screenshot
 
-![NoteTakerScreenshot](./public/images/placeholder.png)
+![NoteTakerScreenshot](./public/images/finished-product.png)
 
 ## Deployed page
 
