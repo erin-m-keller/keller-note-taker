@@ -1,7 +1,7 @@
 {
   "name": "keller-note-taker",
   "version": "1.0.0",
-  "description": "An application that uses an Express.js backend to save,update,delete notes that are saved to a JSON file",
+  "description": "An application that uses an Express.js backend to save, update, delete notes that are saved to a JSON file",
   "main": "app.js",
   "scripts": {
     "test": "test"

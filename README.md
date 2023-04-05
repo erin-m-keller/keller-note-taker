@@ -2,7 +2,7 @@
 
 ## Description
 
-An application that will display the current and future weather conditions for any selected city. Powered by [OpenWeather API](https://openweathermap.org/api).
+An application that uses an Express.js backend to save, update and delete notes that are saved to a JSON file
 
   ## Table of Contents
   * [Technology Stack](#technology-stack)
@@ -24,28 +24,32 @@ An application that will display the current and future weather conditions for a
 ## User Story
 
 ```md
-AS A traveler
-I WANT to see the weather outlook for multiple cities
-SO THAT I can plan a trip accordingly
+AS A small business owner
+I WANT to be able to write and save notes
+SO THAT I can organize my thoughts and keep track of tasks I need to complete
 ```
 
 ## Acceptance Criteria
 
 ```md
-GIVEN a weather dashboard with form inputs
-WHEN I search for a city
-THEN I am presented with current and future conditions for that  
-city and that city is added to the search history
-WHEN I view current weather conditions for that city
-THEN I am presented with the city name, the date, an icon  
-representation of weather conditions, the temperature, the humidity,  
-and the the wind speed
-WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that displays the date,  
-an icon representation of weather conditions, the temperature, the  
-wind speed, and the humidity
-WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city
+GIVEN a note-taking application
+WHEN I open the Note Taker
+THEN I am presented with a landing page with a link to a notes  
+page
+WHEN I click on the link to the notes page
+THEN I am presented with a page with existing notes listed in  
+the left-hand column, plus empty fields to enter a new note title  
+and the note’s text in the right-hand column
+WHEN I enter a new note title and the note’s text
+THEN a Save icon appears in the navigation at the top of the page
+WHEN I click on the Save icon
+THEN the new note I have entered is saved and appears in the left-hand  
+column with the other existing notes
+WHEN I click on an existing note in the list in the left-hand column
+THEN that note appears in the right-hand column
+WHEN I click on the Write icon in the navigation at the top of the page
+THEN I am presented with empty fields to enter a new note title and the  
+note’s text in the right-hand column
 ```
 
 ## Installation
