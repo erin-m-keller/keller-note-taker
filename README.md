@@ -16,11 +16,11 @@ An application that uses an Express.js backend to save, update and delete notes 
 
 ## Technology Stack
 
-![HTML5](https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white)
-![javaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![nodeJs](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-![expressJs](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
+![HTML5](https://img.shields.io/badge/-HTML5-61DAFB?logoColor=blue&style=flat)
+![CSS](https://img.shields.io/badge/-CSS-61DAFB?logoColor=blue&style=flat)
+![javaScript](https://img.shields.io/badge/-JavaScript-61DAFB?logoColor=blue&style=flat)
+![nodeJs](https://img.shields.io/badge/-NodeJS-61DAFB?logoColor=blue&style=flat)
+![expressJs](https://img.shields.io/badge/-ExpressJS-61DAFB?logoColor=blue&style=flat)
 ![pureCss](https://img.shields.io/badge/-PureCSS-61DAFB?logoColor=blue&style=flat)
 
 ## User Story
