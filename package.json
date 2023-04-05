@@ -1,0 +1,20 @@
+{
+  "name": "keller-note-taker",
+  "version": "1.0.0",
+  "description": "An application that uses an Express.js backend to save,update,delete notes that are saved to a JSON file",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "express.js",
+    "node.js",
+    "html",
+    "css"
+  ],
+  "author": "Erin M Keller",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
