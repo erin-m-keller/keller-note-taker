@@ -21,7 +21,7 @@ An application that uses an Express.js backend to save, update and delete notes 
 ![javaScript](https://img.shields.io/badge/-JavaScript-61DAFB?color=yellow&style=flat)
 ![nodeJs](https://img.shields.io/badge/-NodeJS-61DAFB?color=green&style=flat)
 ![expressJs](https://img.shields.io/badge/-ExpressJS-61DAFB?color=blue&style=flat)
-![pureCss](https://img.shields.io/badge/-PureCSS-61DAFB?color=purple&style=flat)
+![pureCss](https://img.shields.io/badge/-Pure.css-61DAFB?color=purple&style=flat)
 
 ## User Story
 
