@@ -4,7 +4,7 @@
   "description": "An application that uses an Express.js backend to save, update, delete notes that are saved to a JSON file",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "start": "node app.js"
   },
   "keywords": [
     "express.js",
