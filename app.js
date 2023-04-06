@@ -36,6 +36,22 @@ app.post('/save-note', (req, res) => {
   });
 });
 
+app.post('/save-selected-note', (req, res) => {
+  const { noteIndex, title, msg } = req.body;
+  fs.readFile('data/db.json', 'utf-8', (err, data) => {
+    let existingData = JSON.parse(data),
+        newData = { title, msg },
+        updatedData;
+    existingData[noteIndex] = newData;
+    updatedData = JSON.stringify(existingData);  
+    if (err) return res.status(500).json({error: 'Error reading db.json'});
+    fs.writeFile('data/db.json', updatedData, (err) => {
+      if (err) throw err;
+      res.status(200).json({success: 'Note successfully saved!'});
+    });
+  });
+});
+
 app.get('/load-notes', (req, res) => {
   fs.readFile('data/db.json', 'utf-8', (err, data) => {
     if (err) return res.status(500).json({error: 'Error reading db.json'});

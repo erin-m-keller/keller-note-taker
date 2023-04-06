@@ -48,20 +48,40 @@ function loadNotes () {
 
 function saveNote () {
     let title = currentTitle.value,
-        msg = noteContent.value;
-    fetch('/save-note', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ title, msg })
-    })
-    .then(response => response.text())
-    .then(data => {
-        loadNotes();
-        clearInputs();
-    })
-    .catch(err => console.log(err));
+        msg = noteContent.value,
+        noteIndex = JSON.parse(localStorage.getItem("currentlyViewing"));
+    if (noteIndex >= 0) {
+        console.log("save selected note");
+        fetch('/save-selected-note', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ noteIndex, title, msg })
+        })
+        .then(response => response.json())
+        .then(data => {
+            loadNotes();
+            localStorage.removeItem("currentlyViewing");
+            clearInputs();
+        })
+        .catch(error => console.error(error));
+    } else {
+        console.log("save new note");
+        fetch("/save-note", {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({ title, msg })
+        })
+        .then(response => response.text())
+        .then(data => {
+            loadNotes();
+            clearInputs();
+        })
+        .catch(err => console.log(err));
+    }
 }
 
 function deleteNote (idx) {
@@ -82,10 +102,10 @@ function deleteNote (idx) {
 
 function showNote (idx) {
     let noteIndex = idx - 1;
-    fetch('/show-note', {
-        method: 'POST',
+    fetch("/show-note", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
         },
         body: JSON.stringify({ noteIndex })
     })
@@ -93,7 +113,9 @@ function showNote (idx) {
     .then(data => {
         currentTitle.value = data.title;
         noteContent.value = data.msg;
+        noteTitleElem.textContent = data.title;
         saveBtnWrapper.style.display = "inline-block";
+        localStorage.setItem("currentlyViewing", noteIndex);
     })
     .catch(error => console.error(error));
 }
@@ -104,6 +126,7 @@ function clearInputs () {
     noteTitleElem.textContent = "";
     saveBtnWrapper.style.display = "none";
     currentTitle.focus();
+    localStorage.removeItem("currentlyViewing");
 }
 
 function checkInputs () {
