@@ -272,6 +272,9 @@ a.pure-button-primary {
 .clickable-row:hover {
     cursor: pointer;
 }
+.pure-menu-link i {
+    font-size: 2em;
+}
 .footer {
     background: #111;
     position: fixed;

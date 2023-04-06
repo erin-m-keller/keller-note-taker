@@ -3,7 +3,8 @@ const currentTitle = document.getElementById("title"),
       noteTitleElem = document.getElementById("note-title"),
       saveBtn = document.getElementById("save-btn"),
       saveBtnWrapper = document.getElementById("save-btn-wrapper"),
-      notesTbl = document.getElementById("notes-tbl");
+      notesTbl = document.getElementById("notes-tbl"),
+      newNoteBtn = document.getElementById("new-note-btn");
 
 function init () {
     loadNotes();
@@ -102,6 +103,7 @@ function clearInputs () {
     noteContent.value = "";
     noteTitleElem.textContent = "";
     saveBtnWrapper.style.display = "none";
+    currentTitle.focus();
 }
 
 function checkInputs () {
@@ -112,6 +114,7 @@ function checkInputs () {
     }
 }
 
+newNoteBtn.addEventListener("click", clearInputs);
 saveBtn.addEventListener("click", saveNote);
 currentTitle.addEventListener("input", checkInputs);
 noteContent.addEventListener("input", checkInputs);

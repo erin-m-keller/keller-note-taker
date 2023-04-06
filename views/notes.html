@@ -8,14 +8,15 @@
     <link rel="stylesheet" href="css/grids-responsive-min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rosario:100,200,300,400,500,600,700,800,900">
-    <title>Express.js Note Taker</title>
+    <title>Note Tracker</title>
   </head>
   <body>
     <div class="header">
         <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-            <a class="pure-menu-heading" href="/"><i class="fa-regular fa-note-sticky"></i>&nbsp;&nbsp;&nbsp;Express.js Note Taker</a>
-            <ul class="pure-menu-list" id="save-btn-wrapper" style="display:none">
-                <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link" id="save-btn"><i class="fa-regular fa-floppy-disk"></i></a></li>
+            <a class="pure-menu-heading" href="/"><i class="fa-regular fa-note-sticky"></i>&nbsp;&nbsp;&nbsp;Note Tracker</a>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item pure-menu-selected"><a href="javascript:void(0)" class="pure-menu-link" id="new-note-btn"><i class="fa-regular fa-pen-to-square"></i></a></li>
+                <li class="pure-menu-item pure-menu-selected" id="save-btn-wrapper" style="display:none"><a href="javascript:void(0)" class="pure-menu-link" id="save-btn"><i class="fa-regular fa-floppy-disk"></i></a></li>
             </ul>
         </div>
     </div>
