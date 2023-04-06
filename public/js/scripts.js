@@ -51,7 +51,6 @@ function saveNote () {
         msg = noteContent.value,
         noteIndex = JSON.parse(localStorage.getItem("currentlyViewing"));
     if (noteIndex >= 0) {
-        console.log("save selected note");
         fetch('/save-selected-note', {
             method: 'POST',
             headers: {
@@ -67,7 +66,6 @@ function saveNote () {
         })
         .catch(error => console.error(error));
     } else {
-        console.log("save new note");
         fetch("/save-note", {
             method: "POST",
             headers: {
@@ -85,7 +83,8 @@ function saveNote () {
 }
 
 function deleteNote (idx) {
-    let noteIndex = idx - 1;
+    let noteIndex = idx - 1,
+        noteIdxStorage = JSON.parse(localStorage.getItem("currentlyViewing"));
     fetch('/delete-note', {
         method: 'POST',
         headers: {
@@ -96,6 +95,7 @@ function deleteNote (idx) {
     .then(response => response.json())
     .then(data => {
         loadNotes();
+        if (noteIndex === noteIdxStorage) clearInputs();
     })
     .catch(error => console.error(error));
 }
