@@ -96,6 +96,14 @@ a.pure-button-primary {
 .pure-table {
     width: 100%;
 }
+@keyframes textColorAnimation {
+    0%   { color: #E6F14A; }
+    25%  { color: #E2A0FF; }
+    50%  { color: #FFC1CF; }
+    75%  { color: #E5625E; }
+    100% { color: #E6F14A; }
+}
+
 
 /************************************************
    LAYOUT                                 @layout
@@ -150,6 +158,14 @@ a.pure-button-primary {
     background: none;
     border: none;
     color: #AECFE5;
+}
+#new-note-btn,
+#save-btn {
+    fill: #fff;
+    -webkit-animation: textColorAnimation 10000ms infinite;
+    -moz-animation: textColorAnimation 10000ms infinite;
+    -o-animation: textColorAnimation 10000ms infinite;
+    animation: textColorAnimation 10000ms infinite;
 }
 
 /************************************************
