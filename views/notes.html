@@ -14,6 +14,9 @@
     <div class="header">
         <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
             <a class="pure-menu-heading" href="/"><i class="fa-regular fa-note-sticky"></i>&nbsp;&nbsp;&nbsp;Express.js Note Taker</a>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link"><i class="fa-regular fa-floppy-disk"></i></a></li>
+            </ul>
         </div>
     </div>
     <div id="layout" class="pure-g">
@@ -66,7 +69,7 @@
                     <form class="pure-form pure-form-stacked">
                         <fieldset>
                             <label for="title">Enter Note Title</label>
-                            <input type="text" id="title" class="content-subhead" placeholder="Enter Note Title" style="width:100%" />
+                            <input type="text" id="title" class="content-subhead" placeholder="Enter Note Title" style="width:100%" required />
                         </fieldset>
                     </form>
                     <section class="note" style="margin-bottom:5em">
@@ -74,7 +77,7 @@
                             <h2 id="note-title"></h2>
                         </header>
                         <div class="note-description">
-                            <textarea class="pure-input-1-2" placeholder="Note details go here."></textarea>
+                            <textarea class="pure-input-1-2" id="note-content" placeholder="Note details go here." required></textarea>
                         </div>
                     </section>
                 </div>
