@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/bulma.min.css">
     <link rel="stylesheet" href="css/pure.min.css">
     <link rel="stylesheet" href="css/grids-responsive-min.css">
     <link rel="stylesheet" href="css/styles.css">
@@ -11,6 +12,13 @@
     <title>Note Tracker</title>
   </head>
   <body>
+    <div class="modal" id="confirm-modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="box" id="modal-content"></div>
+      </div>
+      <button class="modal-close is-large" aria-label="close" onclick="closeConfirmModal()"></button>
+    </div>
     <div class="header">
         <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
             <a class="pure-menu-heading" href="/"><i class="fa-regular fa-note-sticky"></i>&nbsp;&nbsp;&nbsp;Note Tracker</a>
@@ -43,20 +51,18 @@
         <div class="content pure-u-1 pure-u-md-3-4">
             <div>
                 <div class="notes">
+                    <div class="note-header">
+                        <h2 id="note-title"></h2>
+                    </div>
                     <form class="pure-form pure-form-stacked">
                         <fieldset>
                             <label for="title">Enter Note Title</label>
-                            <input type="text" id="title" class="content-subhead pure-input-1-2" placeholder="Enter Note Title" style="width:100%" required />
+                            <input type="text" id="title" class="content-subhead" placeholder="Enter Note Title" style="width:100%" required />
+                        </fieldset>
+                        <fieldset class="note-description note">
+                            <textarea id="note-content" placeholder="Note details go here." required></textarea>
                         </fieldset>
                     </form>
-                    <section class="note" style="margin-bottom:5em">
-                        <header class="note-header">
-                            <h2 id="note-title"></h2>
-                        </header>
-                        <div class="note-description">
-                            <textarea class="pure-input-1-2" id="note-content" placeholder="Note details go here." required></textarea>
-                        </div>
-                    </section>
                 </div>
             </div>
         </div>

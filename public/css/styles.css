@@ -96,6 +96,16 @@ a.pure-button-primary {
 .pure-table {
     width: 100%;
 }
+.button-warning {
+    background: var(--btn-color);
+    color: #000;
+}
+.button-error {
+    background: #191919;
+}
+#modal-content button {
+    margin: 1em 1em 1em 0;
+}
 @keyframes textColorAnimation {
     0%   { color: #E6F14A; }
     25%  { color: #E2A0FF; }
@@ -296,6 +306,7 @@ a.pure-button-primary {
     position: fixed;
     bottom: 0;
     width: 100%;
+    padding: 1em;
 }
 
 .footer a {

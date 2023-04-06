@@ -4,7 +4,9 @@ const currentTitle = document.getElementById("title"),
       saveBtn = document.getElementById("save-btn"),
       saveBtnWrapper = document.getElementById("save-btn-wrapper"),
       notesTbl = document.getElementById("notes-tbl"),
-      newNoteBtn = document.getElementById("new-note-btn");
+      newNoteBtn = document.getElementById("new-note-btn"),
+      confirmModal = document.getElementById("confirm-modal"),
+      modalContent = document.getElementById("modal-content");
 
 function init () {
     loadNotes();
@@ -35,7 +37,7 @@ function loadNotes () {
                 titleCell.className = "clickable-row";
                 anchorIcon.className = "fa-regular fa-trash-can";
                 anchor.href = "javascript:void(0)";
-                anchor.addEventListener("click", () => deleteNote(index));
+                anchor.addEventListener("click", () => showConfirmModal(index));
                 anchor.appendChild(anchorIcon);
                 idxCell.appendChild(document.createTextNode(index));
                 titleCell.appendChild(document.createTextNode(title));
@@ -95,6 +97,7 @@ function deleteNote (idx) {
     .then(response => response.json())
     .then(data => {
         loadNotes();
+        confirmModal.classList.remove("is-active");
         if (noteIndex === noteIdxStorage) clearInputs();
     })
     .catch(error => console.error(error));
@@ -135,6 +138,28 @@ function checkInputs () {
     } else {
         saveBtnWrapper.style.display = "none";
     }
+}
+
+function showConfirmModal (idx) {
+    let saveBtn = document.createElement('button'),
+        cancelBtn = document.createElement('button'),
+        heading = document.createElement('h2')
+    modalContent.innerHTML = "";
+    heading.innerText = "Are you sure you want to delete this note?";
+    cancelBtn.innerText = "Cancel";
+    cancelBtn.className = "pure-button button-error";
+    cancelBtn.addEventListener("click", () => closeConfirmModal());
+    saveBtn.innerText = "Delete";
+    saveBtn.className = "pure-button button-warning";
+    saveBtn.addEventListener("click", () => deleteNote(idx));
+    modalContent.appendChild(heading);
+    modalContent.appendChild(cancelBtn);
+    modalContent.appendChild(saveBtn);
+    confirmModal.classList.add("is-active");
+}
+
+function closeConfirmModal () {
+  confirmModal.classList.remove("is-active");
 }
 
 newNoteBtn.addEventListener("click", clearInputs);
