@@ -14,7 +14,7 @@ function init () {
 init();
 
 function loadNotes () {
-    fetch('/load-notes').then(response => response.json())
+    fetch("/api/load-notes").then(response => response.json())
     .then(data => {
         notesTbl.innerHTML = "";
         if (data.length === 0) {
@@ -52,10 +52,10 @@ function saveNote () {
         msg = noteContent.value,
         noteIndex = JSON.parse(localStorage.getItem("currentlyViewing"));
     if (noteIndex != null) {
-        fetch('/save-selected-note', {
-            method: 'POST',
+        fetch("/api/save-selected-note", {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type":"application/json"
             },
             body: JSON.stringify({ noteIndex, title, msg })
         })
@@ -67,7 +67,7 @@ function saveNote () {
         })
         .catch(error => console.error(error));
     } else {
-        fetch("/save-note", {
+        fetch("/api/save-note", {
             method: "POST",
             headers: {
                 "Content-Type":"application/json"
@@ -86,10 +86,10 @@ function saveNote () {
 function deleteNote (idx) {
     let noteIndex = idx - 1,
         noteIdxStorage = JSON.parse(localStorage.getItem("currentlyViewing"));
-    fetch('/delete-note', {
-        method: 'POST',
+    fetch("/api/delete-note", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type":"application/json"
         },
         body: JSON.stringify({ noteIndex })
     })
@@ -104,7 +104,7 @@ function deleteNote (idx) {
 
 function showNote (idx) {
     let noteIndex = idx - 1;
-    fetch("/show-note", {
+    fetch("/api/show-note", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
