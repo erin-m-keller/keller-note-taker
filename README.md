@@ -66,6 +66,8 @@ note’s text in the right-hand column
 
 ![NoteTakerScreenshot](./public/images/finished-product.png)
 
+![NoteTakerScreenshot2](./public/images/finished-product2.png)
+
 ## Deployed page
 
 [View Published Page](https://keller-note-taker.herokuapp.com/)

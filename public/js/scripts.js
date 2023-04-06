@@ -1,6 +1,5 @@
 const currentTitle = document.getElementById("title"),
       noteContent = document.getElementById("note-content"),
-      noteTitleElem = document.getElementById("note-title"),
       saveBtn = document.getElementById("save-btn"),
       saveBtnWrapper = document.getElementById("save-btn-wrapper"),
       notesTbl = document.getElementById("notes-tbl"),
@@ -116,7 +115,6 @@ function showNote (idx) {
     .then(data => {
         currentTitle.value = data.title;
         noteContent.value = data.msg;
-        noteTitleElem.textContent = data.title;
         saveBtnWrapper.style.display = "inline-block";
         localStorage.setItem("currentlyViewing",JSON.stringify(noteIndex));
     })
@@ -126,7 +124,6 @@ function showNote (idx) {
 function clearInputs () {
     currentTitle.value = "";
     noteContent.value = "";
-    noteTitleElem.textContent = "";
     saveBtnWrapper.style.display = "none";
     currentTitle.focus();
     localStorage.removeItem("currentlyViewing");
@@ -166,7 +163,3 @@ newNoteBtn.addEventListener("click", clearInputs);
 saveBtn.addEventListener("click", saveNote);
 currentTitle.addEventListener("input", checkInputs);
 noteContent.addEventListener("input", checkInputs);
-currentTitle.addEventListener("input", (event) => {
-    let inputValue = event.target.value;
-    noteTitleElem.textContent = inputValue;
-});
