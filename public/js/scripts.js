@@ -1,29 +1,43 @@
 const currentTitle = document.getElementById("title"),
-      message = document.getElementById("note-content"),
-      noteContent = document.getElementById("note-content");
-let inputValue = ""; 
+      noteContent = document.getElementById("note-content"),
+      noteTitleElem = document.getElementById("note-title"),
+      saveBtn = document.getElementById("save-btn");
 
-fetch('/save-note', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ currentTitle, message })
-})
-.then(response => response.text())
-.then(data => console.log(data))
-.catch(err => console.log(err));
+function saveNote () {
+    let title = currentTitle.value,
+        msg = noteContent.value;
+    fetch('/save-note', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title, msg })
+    })
+    .then(response => response.text())
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+    clearInputs();
+}
+
+function clearInputs () {
+    currentTitle.value = "";
+    noteContent.value = "";
+    noteTitleElem.value = "";
+}
 
 function checkInputs () {
-    if (currentTitle.value && noteContent.value) {
-        document.getElementById("save-btn").style.display = "block";
+    let saveBtnWrapper = document.getElementById("save-btn-wrapper");
+    if (currentTitle.value.length > 0 && noteContent.value.length > 0) {
+        saveBtnWrapper.style.display = "inline-block";
+    } else {
+        saveBtnWrapper.style.display = "none";
     }
 }
 
+saveBtn.addEventListener("click", saveNote);
 currentTitle.addEventListener("input", checkInputs);
 noteContent.addEventListener("input", checkInputs);
 currentTitle.addEventListener("input", (event) => {
-    const noteTitleElem = document.getElementById("note-title");
-    inputValue = event.target.value;
+    let inputValue = event.target.value;
     noteTitleElem.textContent = inputValue;
 });

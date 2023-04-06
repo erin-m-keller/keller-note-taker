@@ -138,6 +138,10 @@ a.pure-button-primary {
 .home-menu .pure-menu-selected a {
     color: white;
 }
+.home-menu .pure-menu-selected>.pure-menu-link, 
+.home-menu .pure-menu-selected>.pure-menu-link:visited {
+    color: white;
+}
 .home-menu a {
     color: #6FBEF3;
 }

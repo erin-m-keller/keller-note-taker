@@ -22,17 +22,25 @@ app.get('/notes', function(req, res) {
 });
 
 app.post('/save-note', (req, res) => {
-  const { noteTitle, noteMsg } = req.body,
-        data = {
-          title: noteTitle,
-          message: noteMsg
-  };
-  fs.writeFile('data/db.json', JSON.stringify(data), (err) => {
-    if (err) throw err;
-    console.log('Data saved to file');
-    res.send('Data saved to file');
+  const { title, msg } = req.body;
+  fs.readFile('data/db.json', 'utf-8', (err, data) => {
+    let existingData = JSON.parse(data),
+        newData = { title, msg },
+        updatedData;
+    existingData.push(newData);
+    updatedData = JSON.stringify(existingData, null, 2);  
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Error reading data');
+    }
+    fs.writeFile('data/db.json', updatedData, (err) => {
+      if (err) throw err;
+      console.log('Data saved to file');
+      res.send('Data saved to file');
+    });
   });
 });
+
 
 app.listen(port);
 console.log('Server started at http://localhost:' + port);
