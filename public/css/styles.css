@@ -256,6 +256,11 @@ a.pure-button-primary {
     background: #2d3e50;
     color: #aaa;
 }
+.note-description textarea {
+    width: 100%;
+    height: 52vh;
+    padding: 1em;
+}
 .footer {
     background: #111;
     position: fixed;
