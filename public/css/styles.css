@@ -50,6 +50,7 @@ h5,
 h6,
 label {
     color: #191919;
+    word-wrap: break-word;
 }
 .pure-img-responsive {
     max-width: 100%;
