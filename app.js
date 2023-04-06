@@ -9,9 +9,6 @@ const express = require('express'),
 app.use("/api",api);
 app.use("/",routes);
 
-// middleware to parse request body
-app.use(express.json());
-
 // serve client side files to html pages
 app.use(express.static(path.join(__dirname, '/public')));
 
