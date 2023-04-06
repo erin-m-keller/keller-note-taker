@@ -31,8 +31,8 @@ router.post('/save-selected-note', (req, res) => {
         updatedData = JSON.stringify(existingData);  
         if (err) return res.status(500).json({error: 'Error reading db.json'});
         fs.writeFile('data/db.json', updatedData, (err) => {
-        if (err) throw err;
-        res.status(200).json({success: 'Note successfully saved!'});
+            if (err) throw err;
+            res.status(200).json({success: 'Note successfully saved!'});
         });
     });
 });
@@ -51,8 +51,8 @@ router.post('/delete-note', (req, res) => {
         noteData.splice(noteIndex, 1);
         if (err) return res.status(500).json({error: 'Error reading db.json'});
         fs.writeFile('data/db.json', JSON.stringify(noteData), err => {
-        if (err) return res.status(500).json({error: 'Error writing to db.json'});
-        res.status(200).json({success: 'Note successfully deleted!'});
+            if (err) return res.status(500).json({error: 'Error writing to db.json'});
+            res.status(200).json({success: 'Note successfully deleted!'});
         });
     });
 });
