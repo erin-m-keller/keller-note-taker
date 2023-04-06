@@ -269,6 +269,9 @@ a.pure-button-primary {
     height: 52vh;
     padding: 1em;
 }
+.clickable-row:hover {
+    cursor: pointer;
+}
 .footer {
     background: #111;
     position: fixed;

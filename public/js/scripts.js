@@ -2,6 +2,7 @@ const currentTitle = document.getElementById("title"),
       noteContent = document.getElementById("note-content"),
       noteTitleElem = document.getElementById("note-title"),
       saveBtn = document.getElementById("save-btn"),
+      saveBtnWrapper = document.getElementById("save-btn-wrapper"),
       notesTbl = document.getElementById("notes-tbl");
 
 function init () {
@@ -28,9 +29,11 @@ function loadNotes () {
                     titleCell = newRow.insertCell(),
                     deleteCell = newRow.insertCell(),
                     anchor = document.createElement('a'),
-                    anchorIcon = document.createElement('i'); 
+                    anchorIcon = document.createElement('i');
+                titleCell.addEventListener("click", () => showNote(index)); 
+                titleCell.className = "clickable-row";
                 anchorIcon.className = "fa-regular fa-trash-can";
-                anchor.href = "javascript:void(0)"
+                anchor.href = "javascript:void(0)";
                 anchor.addEventListener("click", () => deleteNote(index));
                 anchor.appendChild(anchorIcon);
                 idxCell.appendChild(document.createTextNode(index));
@@ -76,8 +79,25 @@ function deleteNote (idx) {
     .catch(error => console.error(error));
 }
 
+function showNote (idx) {
+    let noteIndex = idx - 1;
+    fetch('/show-note', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ noteIndex })
+    })
+    .then(response => response.json())
+    .then(data => {
+        currentTitle.value = data.title;
+        noteContent.value = data.msg;
+        saveBtnWrapper.style.display = "inline-block";
+    })
+    .catch(error => console.error(error));
+}
+
 function clearInputs () {
-    let saveBtnWrapper = document.getElementById("save-btn-wrapper");
     currentTitle.value = "";
     noteContent.value = "";
     noteTitleElem.textContent = "";
@@ -85,7 +105,6 @@ function clearInputs () {
 }
 
 function checkInputs () {
-    let saveBtnWrapper = document.getElementById("save-btn-wrapper");
     if (currentTitle.value.length > 0 && noteContent.value.length > 0) {
         saveBtnWrapper.style.display = "inline-block";
     } else {

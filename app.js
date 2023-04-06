@@ -28,21 +28,17 @@ app.post('/save-note', (req, res) => {
         updatedData;
     existingData.push(newData);
     updatedData = JSON.stringify(existingData, null, 2);  
-    if (err) {
-      return res.status(500).send(JSON.stringify('Error reading db.json'));
-    }
+    if (err) return res.status(500).json({error: 'Error reading db.json'});
     fs.writeFile('data/db.json', updatedData, (err) => {
       if (err) throw err;
-      res.status(200).send(JSON.stringify('Note successfully saved!'));
+      res.status(200).json({success: 'Note successfully saved!'});
     });
   });
 });
 
 app.get('/load-notes', (req, res) => {
   fs.readFile('data/db.json', 'utf-8', (err, data) => {
-    if (err) {
-      return res.status(500).send(JSON.stringify('Error reading db.json'));
-    }
+    if (err) return res.status(500).json({error: 'Error reading db.json'});
     res.json(JSON.parse(data));
   });
 });
@@ -52,15 +48,23 @@ app.post('/delete-note', (req, res) => {
   fs.readFile('data/db.json', 'utf-8', (err, data) => {
     const jsonData = JSON.parse(data);
     jsonData.splice(noteIndex, 1);
-    if (err) {
-      return res.status(500).send('Error reading db.json');
-    }
+    if (err) return res.status(500).json({error: 'Error reading db.json'});
     fs.writeFile('data/db.json', JSON.stringify(jsonData), err => {
-      if (err) {
-        return res.status(500).send(JSON.stringify('Error writing to db.json'));
-      }
-      res.status(200).send(JSON.stringify('Note successfully deleted!'));
+      if (err) return res.status(500).json({error: 'Error writing to db.json'});
+      res.status(200).json({success: 'Note successfully deleted!'});
     });
+  });
+});
+
+app.post('/show-note', (req, res) => {
+  const { noteIndex } = req.body;
+  console.log("noteIndex: " + noteIndex);
+  fs.readFile('data/db.json', 'utf-8', (err, data) => {
+    const jsonData = JSON.parse(data),
+          selectedNote = jsonData[noteIndex];
+    if (err) return res.status(500).json({error: 'Error reading db.json'});
+    if (!selectedNote) return res.status(404).json({error: 'Note not found.'});
+    res.json(selectedNote);
   });
 });
 
