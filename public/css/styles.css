@@ -203,7 +203,7 @@ a.pure-button-primary {
     background: white;
 }
 .content {
-    padding: 1em;
+    padding: 2em 4em;
     height: 100%;
 }
 .content-head {
@@ -232,6 +232,7 @@ a.pure-button-primary {
 .sidebar {
     padding: 1em;
     background-color: #2d2d2d;
+    box-shadow: inset -20px 0 25px 15px rgba(0,0,0,0.4);
 }
 @media screen and (min-width:768px) {
     .sidebar {
