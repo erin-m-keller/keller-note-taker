@@ -47,10 +47,10 @@ router.get('/load-notes', (req, res) => {
 router.post('/delete-note', (req, res) => {
     const { noteIndex } = req.body;
     fs.readFile('data/db.json', 'utf-8', (err, data) => {
-        const jsonData = JSON.parse(data);
-        jsonData.splice(noteIndex, 1);
+        const noteData = JSON.parse(data);
+        noteData.splice(noteIndex, 1);
         if (err) return res.status(500).json({error: 'Error reading db.json'});
-        fs.writeFile('data/db.json', JSON.stringify(jsonData), err => {
+        fs.writeFile('data/db.json', JSON.stringify(noteData), err => {
         if (err) return res.status(500).json({error: 'Error writing to db.json'});
         res.status(200).json({success: 'Note successfully deleted!'});
         });
@@ -58,12 +58,10 @@ router.post('/delete-note', (req, res) => {
 });
 
 router.post('/show-note', (req, res) => {
-    console.log("req: " + JSON.stringify(req.body));
     const { noteIndex } = req.body;
-    console.log("noteIndex: " + noteIndex);
     fs.readFile('data/db.json', 'utf-8', (err, data) => {
-        const jsonData = JSON.parse(data),
-            selectedNote = jsonData[noteIndex];
+        const noteData = JSON.parse(data),
+            selectedNote = noteData[noteIndex];
         if (err) return res.status(500).json({error: err});
         if (!selectedNote) return res.status(404).json({error: 'Note not found.'});
         res.json(selectedNote);
