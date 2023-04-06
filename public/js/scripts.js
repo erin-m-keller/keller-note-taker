@@ -1,7 +1,46 @@
 const currentTitle = document.getElementById("title"),
       noteContent = document.getElementById("note-content"),
       noteTitleElem = document.getElementById("note-title"),
-      saveBtn = document.getElementById("save-btn");
+      saveBtn = document.getElementById("save-btn"),
+      notesTbl = document.getElementById("notes-tbl");
+
+function init () {
+    loadNotes();
+}
+
+init();
+
+function loadNotes () {
+    fetch('/load-notes').then(response => response.json())
+    .then(data => {
+        notesTbl.innerHTML = "";
+        if (data.length === 0) {
+            let newRow = notesTbl.insertRow(),
+                msgCell = newRow.insertCell();
+            msgCell.colSpan = 3;
+            msgCell.appendChild(document.createTextNode("Create a new note to see it saved here!"));
+        } else {
+            for (var [idx,note] of data.entries()) {
+                let title = note.title,
+                    index = idx + 1,
+                    newRow = notesTbl.insertRow(),
+                    idxCell = newRow.insertCell(),
+                    titleCell = newRow.insertCell(),
+                    deleteCell = newRow.insertCell(),
+                    anchor = document.createElement('a'),
+                    anchorIcon = document.createElement('i'); 
+                anchorIcon.className = "fa-regular fa-trash-can";
+                anchor.href = "javascript:void(0)"
+                anchor.addEventListener("click", () => deleteNote(index));
+                anchor.appendChild(anchorIcon);
+                idxCell.appendChild(document.createTextNode(index));
+                titleCell.appendChild(document.createTextNode(title));
+                deleteCell.appendChild(anchor);
+            }
+        }
+    })
+    .catch(error => console.error(error));
+}
 
 function saveNote () {
     let title = currentTitle.value,
@@ -14,15 +53,35 @@ function saveNote () {
         body: JSON.stringify({ title, msg })
     })
     .then(response => response.text())
-    .then(data => console.log(data))
+    .then(data => {
+        loadNotes();
+        clearInputs();
+    })
     .catch(err => console.log(err));
-    clearInputs();
+}
+
+function deleteNote (idx) {
+    let noteIndex = idx - 1;
+    fetch('/delete-note', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ noteIndex })
+    })
+    .then(response => response.json())
+    .then(data => {
+        loadNotes();
+    })
+    .catch(error => console.error(error));
 }
 
 function clearInputs () {
+    let saveBtnWrapper = document.getElementById("save-btn-wrapper");
     currentTitle.value = "";
     noteContent.value = "";
-    noteTitleElem.value = "";
+    noteTitleElem.textContent = "";
+    saveBtnWrapper.style.display = "none";
 }
 
 function checkInputs () {
