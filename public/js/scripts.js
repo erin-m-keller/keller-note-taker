@@ -50,7 +50,7 @@ function saveNote () {
     let title = currentTitle.value,
         msg = noteContent.value,
         noteIndex = JSON.parse(localStorage.getItem("currentlyViewing"));
-    if (noteIndex >= 0) {
+    if (noteIndex != null) {
         fetch('/save-selected-note', {
             method: 'POST',
             headers: {
@@ -115,7 +115,7 @@ function showNote (idx) {
         noteContent.value = data.msg;
         noteTitleElem.textContent = data.title;
         saveBtnWrapper.style.display = "inline-block";
-        localStorage.setItem("currentlyViewing", noteIndex);
+        localStorage.setItem("currentlyViewing",JSON.stringify(noteIndex));
     })
     .catch(error => console.error(error));
 }
