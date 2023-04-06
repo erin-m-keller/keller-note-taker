@@ -12,11 +12,11 @@ router.post('/save-note', (req, res) => {
             newData = { title, msg },
             updatedData;
         existingData.push(newData);
-        updatedData = JSON.stringify(existingData, null, 2);  
+        updatedData = JSON.stringify(existingData);  
         if (err) return res.status(500).json({error: 'Error reading db.json'});
         fs.writeFile('data/db.json', updatedData, (err) => {
-        if (err) throw err;
-        res.status(200).json({success: 'Note successfully saved!'});
+            if (err) throw err;
+            res.status(200).json({success: 'Note successfully saved!'});
         });
     });
 });
