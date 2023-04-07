@@ -103,6 +103,10 @@ a.pure-button-primary {
 .button-error {
     background: #191919;
 }
+.note-active {
+    font-weight: bold;
+    color: #191919;
+}
 #modal-content button {
     margin: 1em 1em 1em 0;
 }

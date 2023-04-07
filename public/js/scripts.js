@@ -34,6 +34,7 @@ function loadNotes () {
                     anchorIcon = document.createElement('i');
                 titleCell.addEventListener("click", () => showNote(index)); 
                 titleCell.className = "clickable-row";
+                titleCell.setAttribute("id","note-id-" + index);
                 anchorIcon.className = "fa-regular fa-trash-can";
                 anchor.href = "javascript:void(0)";
                 anchor.addEventListener("click", () => showConfirmModal(index));
@@ -103,7 +104,13 @@ function deleteNote (idx) {
 }
 
 function showNote (idx) {
-    let noteIndex = idx - 1;
+    let noteIndex = idx - 1,
+        noteElem = document.getElementById("note-id-" + idx),
+        allNoteElems = document.getElementsByClassName("clickable-row");
+    for (let i = 0; i < allNoteElems.length; i++) {
+        allNoteElems[i].classList.remove("note-active");
+    }
+    noteElem.classList.add("note-active");
     fetch("/api/show-note", {
         method: "POST",
         headers: {
@@ -122,6 +129,10 @@ function showNote (idx) {
 }
 
 function clearInputs () {
+    let allNoteElems = document.getElementsByClassName("clickable-row");
+    for (let i = 0; i < allNoteElems.length; i++) {
+        allNoteElems[i].classList.remove("note-active");
+    }
     currentTitle.value = "";
     noteContent.value = "";
     saveBtnWrapper.style.display = "none";
