@@ -56,7 +56,20 @@ note’s text in the right-hand column
 
 ## Installation
 
-// TODO: Add installation instructions
+  * Ensure you are running Node.js v16.  
+  * Clone the repository.
+  ```
+    git clone git@github.com:erin-m-keller/keller-note-tracker.git
+  ```
+  * Install the dependencies.
+  ```bash
+    npm i
+  ```
+  * Start the application.
+  ```md
+    npm start
+  ```
+  > Answer the prompts to generate an SVG file.
 
 ## Tests
 
