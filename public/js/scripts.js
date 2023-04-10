@@ -24,7 +24,7 @@ function init () {
  */
 function loadNotes () {
     // fetch the route
-    fetch("/api/load-notes").then(response => response.json())
+    fetch("/api/notes").then(response => response.json())
     .then(data => {
         // clear the table of previous elements
         notesTbl.innerHTML = "";
@@ -89,7 +89,7 @@ function saveNote () {
     // if note index is not null
     if (noteIndex != null) {
         // call the route and pass in the note index, title and message to update
-        fetch("/api/save-selected-note", {
+        fetch("/api/selected-note", {
             method: "POST",
             headers: {
                 "Content-Type":"application/json"
@@ -112,7 +112,7 @@ function saveNote () {
     // else, no index means this is a new note
     else {
         // call the route and pass in the note title and message to update
-        fetch("/api/save-note", {
+        fetch("/api/notes", {
             method: "POST",
             headers: {
                 "Content-Type":"application/json"

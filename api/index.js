@@ -12,12 +12,28 @@ const express = require('express'),
 router.use(express.json());
 
 /**
- * @saveNote
+ * @getNotes
+ * API call that reads the db.json file
+ * and returns the JSON data to the
+ * client side
+ */
+router.get('/notes', (req, res) => {
+    // read the db.json file
+    fs.readFile('data/db.json', 'utf-8', (err, data) => {
+        // if error, return message to the client side
+        if (err) return res.status(500).json({error: 'Error reading db.json'});
+        // else return the notes data to the client side
+        res.json(JSON.parse(data));
+    });
+});
+
+/**
+ * @postNotes
  * API call that accepts text parameters
  * from the parsed request body, then
  * saves to the db.json file
  */
-router.post('/save-note', (req, res) => {
+router.post('/notes', (req, res) => {
     // initialize variables
     const { title, msg } = req.body;
     // read the db.json file
@@ -50,7 +66,7 @@ router.post('/save-note', (req, res) => {
  * saves the currently selected note 
  * to the db.json file
  */
-router.post('/save-selected-note', (req, res) => {
+router.post('/selected-note', (req, res) => {
     // initialize variables
     const { noteIndex, title, msg } = req.body;
     // read the db.json file
@@ -77,22 +93,6 @@ router.post('/save-selected-note', (req, res) => {
             // else return a success message
             res.status(200).json({success: 'Note successfully saved!'});
         });
-    });
-});
-
-/**
- * @loadNotes
- * API call that reads the db.json file
- * and returns the JSON data to the
- * client side
- */
-router.get('/load-notes', (req, res) => {
-    // read the db.json file
-    fs.readFile('data/db.json', 'utf-8', (err, data) => {
-        // if error, return message to the client side
-        if (err) return res.status(500).json({error: 'Error reading db.json'});
-        // else return the notes data to the client side
-        res.json(JSON.parse(data));
     });
 });
 
