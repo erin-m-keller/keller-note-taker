@@ -60,6 +60,41 @@ router.post('/notes', (req, res) => {
 });
 
 /**
+ * @deleteNote
+ * API call that accepts ID text parameter
+ * from the parsed request body, then
+ * deletes the currently selected note 
+ * from the db.json file
+ */
+router.delete('/notes/:id', (req, res) => {
+    // initialize variables
+    const noteIndex = req.params.id;
+    // read the db.json file
+    fs.readFile('data/db.json', 'utf-8', (err, data) => {
+        // initialize variables
+        const noteData = JSON.parse(data),
+              noteObj = noteData.findIndex(obj => obj.id === noteIndex);
+        // if note not found with id
+        if (noteObj === -1) {
+            // return 404 not found
+            res.status(404).send('Note not found.');
+            return;
+        }
+        // use the index to delete the specified note from the data
+        noteData.splice(noteObj, 1);
+        // if error, return message to the client side
+        if (err) return res.status(500).json({error: 'Error reading db.json'});
+        // else, write the updated notes data to db.json
+        fs.writeFile('data/db.json', JSON.stringify(noteData), err => {
+            // if error, return message to the client side
+            if (err) return res.status(500).json({error: 'Error writing to db.json'});
+            // else return a success message
+            res.status(200).json({success: 'Note successfully deleted!'});
+        });
+    });
+});
+
+/**
  * @saveSelectedNote
  * API call that accepts text parameters
  * from the parsed request body, then
@@ -92,41 +127,6 @@ router.post('/selected-note', (req, res) => {
             if (err) throw err;
             // else return a success message
             res.status(200).json({success: 'Note successfully saved!'});
-        });
-    });
-});
-
-/**
- * @deleteNote
- * API call that accepts ID text parameter
- * from the parsed request body, then
- * deletes the currently selected note 
- * from the db.json file
- */
-router.post('/delete-note', (req, res) => {
-    // initialize variables
-    const { noteIndex } = req.body;
-    // read the db.json file
-    fs.readFile('data/db.json', 'utf-8', (err, data) => {
-        // initialize variables
-        const noteData = JSON.parse(data),
-              noteObj = noteData.findIndex(obj => obj.id === noteIndex);
-        // if note not found with id
-        if (noteObj === -1) {
-            // return 404 not found
-            res.status(404).send('Note not found.');
-            return;
-        }
-        // use the index to delete the specified note from the data
-        noteData.splice(noteObj, 1);
-        // if error, return message to the client side
-        if (err) return res.status(500).json({error: 'Error reading db.json'});
-        // else, write the updated notes data to db.json
-        fs.writeFile('data/db.json', JSON.stringify(noteData), err => {
-            // if error, return message to the client side
-            if (err) return res.status(500).json({error: 'Error writing to db.json'});
-            // else return a success message
-            res.status(200).json({success: 'Note successfully deleted!'});
         });
     });
 });

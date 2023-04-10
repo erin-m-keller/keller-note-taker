@@ -143,12 +143,8 @@ function deleteNote (idx) {
     let noteIndex = idx,
         noteIdxStorage = JSON.parse(localStorage.getItem("currentlyViewing"));
     // call the route and pass in the note index to delete the selected note
-    fetch("/api/delete-note", {
-        method: "POST",
-        headers: {
-            "Content-Type":"application/json"
-        },
-        body: JSON.stringify({ noteIndex })
+    fetch(`/api/notes/${noteIndex}`, {
+        method: "DELETE"
     })
     // parses json data into a javascript object
     .then(response => response.json())
