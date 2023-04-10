@@ -6,12 +6,12 @@ const express = require('express'),
       api = require("./api"),
       routes = require("./routes");
 
+// serve client side files to html pages (images, js, css, etc.)
+app.use(express.static(path.join(__dirname, '/public')));
+
 // api and html routes
 app.use("/api",api);
 app.use("/",routes);
-
-// serve client side files to html pages (images, js, css, etc.)
-app.use(express.static(path.join(__dirname, '/public')));
 
 // bind/listen to the connections on the specified port
 app.listen(port);
