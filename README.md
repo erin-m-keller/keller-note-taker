@@ -9,7 +9,6 @@ An application that uses an Express.js backend to save, update and delete notes 
   * [User Story](#user-story)
   * [Acceptance Criteria](#acceptance-criteria)
   * [Installation](#installation)
-  * [Tests](#tests)
   * [Screenshot](#screenshot)
   * [Deployed Page](#deployed-page)
   * [License](#license)
@@ -70,10 +69,6 @@ note’s text in the right-hand column
     npm start
   ```
   > Answer the prompts to generate an SVG file.
-
-## Tests
-
-// TODO: Add JEST tests
 
 ## Screenshot
 
