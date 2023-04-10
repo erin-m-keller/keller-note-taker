@@ -45,6 +45,7 @@ function loadNotes () {
             for (var [idx,note] of data.entries()) {
                 // initialize variables
                 let title = note.title,
+                    noteId = note.id,
                     index = idx + 1,
                     newRow = notesTbl.insertRow(),
                     idxCell = newRow.insertCell(),
@@ -53,13 +54,13 @@ function loadNotes () {
                     anchor = document.createElement('a'),
                     anchorIcon = document.createElement('i');
                 // create the table cell
-                titleCell.addEventListener("click", () => showNote(index)); 
+                titleCell.addEventListener("click", () => showNote(noteId)); 
                 titleCell.className = "clickable-row";
-                titleCell.setAttribute("id","note-id-" + index);
+                titleCell.setAttribute("id","note-id-" + noteId);
                 // create the anchor element
                 anchorIcon.className = "fa-regular fa-trash-can";
                 anchor.href = "javascript:void(0)";
-                anchor.addEventListener("click", () => showConfirmModal(index));
+                anchor.addEventListener("click", () => showConfirmModal(noteId));
                 anchor.appendChild(anchorIcon);
                 // append the note index to the cell
                 idxCell.appendChild(document.createTextNode(index));
@@ -139,7 +140,7 @@ function saveNote () {
  */
 function deleteNote (idx) {
     // initialize variables
-    let noteIndex = idx - 1,
+    let noteIndex = idx,
         noteIdxStorage = JSON.parse(localStorage.getItem("currentlyViewing"));
     // call the route and pass in the note index to delete the selected note
     fetch("/api/delete-note", {
@@ -172,7 +173,7 @@ function deleteNote (idx) {
  */
 function showNote (idx) {
     // initialize variables
-    let noteIndex = idx - 1,
+    let noteIndex = idx,
         noteElem = document.getElementById("note-id-" + idx),
         allNoteElems = document.getElementsByClassName("clickable-row");
     // loop through all note element rows
@@ -196,7 +197,7 @@ function showNote (idx) {
         // set the title
         currentTitle.value = data.title;
         // set the note message
-        noteContent.value = data.msg;
+        noteContent.value = data.message;
         // display the save button
         saveBtnWrapper.style.display = "inline-block";
         // set currentlyViewing in local storage

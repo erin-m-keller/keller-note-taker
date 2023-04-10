@@ -1,7 +1,8 @@
 // initialize variables
 const express = require('express'),
       router = express.Router(),
-      fs = require("fs");
+      fs = require("fs"),
+      { v4: uuidv4 } = require('uuid');
 
 /**
  * @jsonParse
@@ -23,7 +24,8 @@ router.post('/save-note', (req, res) => {
     fs.readFile('data/db.json', 'utf-8', (err, data) => {
         // initialize variables
         let existingData = JSON.parse(data),
-            newData = { title, msg },
+            noteId = uuidv4(),
+            newData = { id: noteId, title: title, message: msg },
             updatedData;
         // push the new note to the existing list of notes in db.json
         existingData.push(newData);
@@ -55,10 +57,15 @@ router.post('/save-selected-note', (req, res) => {
     fs.readFile('data/db.json', 'utf-8', (err, data) => {
         // initialize variables
         let existingData = JSON.parse(data),
-            newData = { title, msg },
+            newData = { id: noteIndex, title: title, message: msg },
+            objectToUpdate,
             updatedData;
-        // set the new data to the currently selected note index
-        existingData[noteIndex] = newData;
+        // find the selected note in the json file
+        objectToUpdate = existingData.find(obj => obj.id === noteIndex);
+        // set the new data object id, title and message to the selected note object
+        objectToUpdate.id = newData.id;
+        objectToUpdate.title = newData.title;
+        objectToUpdate.message = newData.message;
         // stringify the data
         updatedData = JSON.stringify(existingData);  
         // if error, return message to the client side
@@ -102,9 +109,16 @@ router.post('/delete-note', (req, res) => {
     // read the db.json file
     fs.readFile('data/db.json', 'utf-8', (err, data) => {
         // initialize variables
-        const noteData = JSON.parse(data);
+        const noteData = JSON.parse(data),
+              noteObj = noteData.findIndex(obj => obj.id === noteIndex);
+        // if note not found with id
+        if (noteObj === -1) {
+            // return 404 not found
+            res.status(404).send('Note not found.');
+            return;
+        }
         // use the index to delete the specified note from the data
-        noteData.splice(noteIndex, 1);
+        noteData.splice(noteObj, 1);
         // if error, return message to the client side
         if (err) return res.status(500).json({error: 'Error reading db.json'});
         // else, write the updated notes data to db.json
@@ -131,7 +145,7 @@ router.post('/show-note', (req, res) => {
     fs.readFile('data/db.json', 'utf-8', (err, data) => {
         // initialize variables
         const noteData = JSON.parse(data),
-            selectedNote = noteData[noteIndex];
+            selectedNote = noteData.find(obj => obj.id === noteIndex);
         // if error, return message to the client side
         if (err) return res.status(500).json({error: err});
         // if specified note is not found, return message to the client side
