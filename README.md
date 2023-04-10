@@ -68,7 +68,7 @@ note’s text in the right-hand column
   ```md
     npm start
   ```
-  > Answer the prompts to generate an SVG file.
+  > View the application at: http://localhost:3000
 
 ## Screenshot
 
