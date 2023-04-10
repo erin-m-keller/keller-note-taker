@@ -61,10 +61,9 @@ router.post('/notes', (req, res) => {
 
 /**
  * @deleteNote
- * API call that accepts ID text parameter
- * from the parsed request body, then
+ * API call that has id parameter, that
  * deletes the currently selected note 
- * from the db.json file
+ * from the db.json file based on that id
  */
 router.delete('/notes/:id', (req, res) => {
     // initialize variables
